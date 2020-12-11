@@ -1,0 +1,16 @@
+/* You can define and customize the Angular Material typography in this file. */
+
+@import '~@angular/material/theming';
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+
+// This is currently not being used / enforced.
+// Wanting to see how the default typography looks first
+$bom-typography: mat-typography-config(
+  $font-family: 'Montserrat, Roboto, "Helvetica Neue", sans-serif'
+);
+
+.mat-expansion-panel-header {
+  line-height: 3rem;
+}

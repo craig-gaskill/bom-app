@@ -1,0 +1,47 @@
+<ng-container *ngIf="configuration$ | async as config">
+  <div *ngIf="!editing" class="mat-form-field">
+    <mat-label *ngIf="label && config.floatLabel !== 'never'">
+      {{label}}
+    </mat-label>
+    <div [attr.id]="id" class="view-value">{{innerFormControl.value}}</div>
+  </div>
+
+  <mat-form-field *ngIf="editing"
+                  [hintLabel]="hintLabelLeft"
+                  [color]="color"
+                  [floatLabel]="config.floatLabel"
+                  [appearance]="config.componentAppearance">
+    <mat-label *ngIf="label">{{label}}</mat-label>
+    <ng-content matPrefix select="[prefix]"></ng-content>
+    <input [attr.id]="id"
+           [attr.name]="name"
+           [attr.type]="type"
+           [attr.minlength]="minlength"
+           [attr.maxlength]="maxlength"
+           [attr.tabindex]="tabindex"
+           matInput
+           [autocomplete]="autocomplete"
+           [autofocus]="autofocus"
+           [required]="required"
+           [formControl]="innerFormControl"
+           #innerElement
+           (blur)="onTouched()">
+
+    <ng-content matSuffix select="[suffix]"></ng-content>
+    <mat-hint align="end" *ngIf="hintLabelRight">{{hintLabelRight}}</mat-hint>
+
+    <mat-error>
+      <ng-container *ngIf="innerFormControl.invalid && innerFormControl.touched">
+        <div *ngIf="innerFormControl.hasError('required')">
+          {{requiredErrorMessage}}
+        </div>
+        <div *ngIf="innerFormControl.hasError('minlength')">
+          <ng-container *ngIf="minlengthErrorMessage; else noMinMsg">{{minlengthErrorMessage}}</ng-container>
+          <ng-template #noMinMsg>Must contain at least {{minlength}} characters.</ng-template>
+        </div>
+      </ng-container>
+
+      <ng-content></ng-content>
+    </mat-error>
+  </mat-form-field>
+</ng-container>

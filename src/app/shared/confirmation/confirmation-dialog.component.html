@@ -1,0 +1,21 @@
+<h3 mat-dialog-title>{{data.title ? data.title : "PLEASE CONFIRM"}}</h3>
+
+<mat-dialog-content>
+  <div [innerHTML]="sanitizedMessage"></div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button type="submit"
+          mat-raised-button
+          [color]="data.approveButtonColor ? data.approveButtonColor : 'primary'"
+          [mat-dialog-close]="data.approveButtonData">
+    {{data.approveButtonText}}
+  </button>
+  <button *ngIf="data.denyButtonText"
+          type="button"
+          mat-raised-button
+          [color]="data.denyButtonColor ? data.denyButtonColor : 'default'"
+          [mat-dialog-close]="data.denyButtonData">
+    {{data.denyButtonText}}
+  </button>
+</mat-dialog-actions>

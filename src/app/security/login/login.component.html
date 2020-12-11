@@ -1,0 +1,43 @@
+<form [formGroup]="loginForm" novalidate cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>LOG IN</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-error *ngIf="errorMessage">
+        {{errorMessage}}
+      </mat-error>
+
+      <bom-email id="email"
+                 label="Email"
+                 [editing]="true"
+                 [required]="true"
+                 [autofocus]="true"
+                 formControlName="email">
+      </bom-email>
+
+      <bom-input id="password"
+                 label="Password"
+                 type="password"
+                 [editing]="true"
+                 [required]="true"
+                 requiredErrorMessage="Please provide a valid password"
+                 formControlName="password">
+      </bom-input>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button
+              color="primary"
+              [disabled]="loginForm.invalid || processing"
+              (click)="onLogin()">
+        LOGIN
+      </button>
+
+      <button mat-raised-button
+              (click)="onRegister()">
+        REGISTER
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,19 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let role of roles">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{role.name}}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <bom-role-detail [role]="role">
+    </bom-role-detail>
+
+  </mat-expansion-panel>
+
+  <mat-action-row>
+    <button type="button"
+            mat-button
+            color="accent">
+      Add Role
+    </button>
+  </mat-action-row>
+</mat-accordion>

@@ -1,0 +1,22 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let dictionary of dictionaries$ | async"
+                       (opened)="onExpandDictionary(dictionary.meaning)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{dictionary.display}}</mat-panel-title>
+      <mat-panel-description>{{dictionary.description}}</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <bom-dictionary-detail *ngIf="expandedMeaning === dictionary.meaning"
+                           [dictionary]="dictionary">
+    </bom-dictionary-detail>
+
+    <mat-action-row>
+      <button type="button"
+              mat-button
+              color="accent"
+              (click)="onAddDictionaryValue(dictionary.meaning)">
+        Add {{dictionary.display}}
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

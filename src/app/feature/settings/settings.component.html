@@ -1,0 +1,46 @@
+<h1>
+  <!--
+  <span *ngIf="childRoute">
+    <a mat-icon-button [routerLink]="['/settings']">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+  </span>
+  <span style="vertical-align: text-top">
+    <span>Settings </span>
+    <span *ngIf="childRouteName"> / {{childRouteName}}</span>
+  </span>
+  -->
+  <span *ngIf="childRoute">
+    <a routerLink="/settings" routerLinkActive="active-link">
+      Settings
+    </a>
+    <span *ngIf="childRouteName"> / {{childRouteName}}</span>
+  </span>
+  <span *ngIf="!childRoute">
+    Settings
+  </span>
+</h1>
+
+<mat-list *ngIf="!childRoute">
+  <a mat-list-item routerLink="dictionaries" routerLinkActive="active-link">
+    <mat-icon mat-list-icon>menu_book</mat-icon>
+    <div mat-line>Dictionaries</div>
+    <div mat-line>Define codified values such as Gender, Race, Ethnicity, etc.</div>
+  </a>
+
+  <a mat-list-item routerLink="roles" routerLinkActive="active-link">
+    <mat-icon mat-list-icon>lock</mat-icon>
+    <div mat-line>Roles</div>
+    <div mat-line>Defines a Role (a grouping of Permissions).</div>
+  </a>
+
+  <a mat-list-item routerLink="staff" routerLinkActive="active-link">
+    <mat-icon mat-list-icon>people</mat-icon>
+    <div mat-line>Staff</div>
+    <div mat-line>Define additional Staff / Users that can access the system.</div>
+  </a>
+</mat-list>
+
+<ng-container *ngIf="childRoute">
+  <router-outlet></router-outlet>
+</ng-container>

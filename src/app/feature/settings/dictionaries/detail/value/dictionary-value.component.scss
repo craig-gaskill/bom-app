@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: row;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    mat-divider {
+      padding: 0.5rem 0;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      bom-input {
+        flex-grow: 1;
+        margin-right: 1rem;
+      }
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+
+      button {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

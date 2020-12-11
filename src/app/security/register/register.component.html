@@ -1,0 +1,103 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>REGISTER</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-vertical-stepper [linear]="true" (selectionChange)="onStepChanged($event)">
+      <mat-step [stepControl]="tenantRegistrationForm">
+        <form [formGroup]="tenantRegistrationForm" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+          <ng-template matStepLabel>Register Organization</ng-template>
+
+          <bom-input label="Organization Name"
+                     [editing]="true"
+                     [maxlength]="50"
+                     [required]="true"
+                     requiredErrorMessage="Please provide a valid name for your Organization"
+                     formControlName="tenantName">
+          </bom-input>
+
+          <div>
+            <button type="submit" mat-button matStepperNext
+                    color="primary"
+                    [disabled]="tenantRegistrationForm.invalid || processing">
+              NEXT
+            </button>
+            <button type="button" mat-button (click)="onCancel()">CANCEL</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="userRegistrationForm">
+        <form [formGroup]="userRegistrationForm">
+          <ng-template matStepLabel>Register User</ng-template>
+
+          <bom-input id="firstName"
+                     label="First Name"
+                     [editing]="true"
+                     [maxlength]="50"
+                     [required]="true"
+                     requiredErrorMessage="You must provide a first name."
+                     formControlName="firstName"
+                     #firstName>
+          </bom-input>
+
+          <bom-input id="lastName"
+                     label="Last Name"
+                     [editing]="true"
+                     [maxlength]="50"
+                     [required]="true"
+                     requiredErrorMessage="You must provide a last name."
+                     formControlName="lastName">
+          </bom-input>
+
+          <bom-email id="email"
+                     label="Email"
+                     [editing]="true"
+                     [maxlength]="256"
+                     [required]="true"
+                     emailInUse
+                     formControlName="email">
+            <ng-container *ngIf="userRegistrationForm.get('email').hasError('emailInUse')">
+              Email is already used.
+            </ng-container>
+          </bom-email>
+
+          <bom-input id="password"
+                     label="Password"
+                     type="password"
+                     [editing]="true"
+                     [maxlength]="50"
+                     [required]="true"
+                     requiredErrorMessage="Please provide a valid password."
+                     formControlName="password">
+          </bom-input>
+
+          <bom-input id="confirmPassword"
+                     label="Confirm Password"
+                     type="password"
+                     [editing]="true"
+                     [maxlength]="50"
+                     [required]="true"
+                     requiredErrorMessage="Please confirm your password."
+                     mustMatch matchingComponentName="password"
+                     formControlName="confirmationPassword">
+            <ng-container *ngIf="userRegistrationForm.get('confirmationPassword').hasError('mustMatch')">
+              You confirmation password must match your password
+            </ng-container>
+          </bom-input>
+
+          <div>
+            <button type="submit" mat-button (click)="onRegister()"
+                    color="primary"
+                    [disabled]="userRegistrationForm.invalid || tenantRegistrationForm.invalid || processing">
+              REGISTER
+            </button>
+            <button type="button" mat-button matStepperPrevious>BACK</button>
+            <button type="button" mat-button (click)="onCancel()">CANCEL</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card-content>
+</mat-card>

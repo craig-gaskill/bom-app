@@ -1,0 +1,71 @@
+/* You can define and customize the Angular Material theme in this file */
+
+@import '~@angular/material/theming';
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$light-primary: mat-palette($mat-blue-grey);
+$light-accent:  mat-palette($mat-orange);
+
+// The warn palette is optional (defaults to red).
+$light-warn:    mat-palette($mat-red, 700);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+// Create the 'dark' theme
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-orange);
+
+// The warn palette is optional (defaults to red).
+$dark-warn:    mat-palette($mat-red, 300);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@media (prefers-color-scheme: light) {
+  @include angular-material-theme($light-theme);
+}
+
+@media (prefers-color-scheme: dark) {
+  @include angular-material-theme($dark-theme);
+}
+
+// Customizations to Angular Material
+
+.mat-drawer-inner-container {
+  text-align: center;
+}
+
+.mat-card-header {
+  margin-bottom: 0.5rem;
+}
+
+.mat-card-header-text {
+  width: 100%;
+}
+
+.mat-card-content {
+  margin-bottom: 0 !important;
+}
+
+.mat-card-actions {
+  margin-bottom: 0.5rem !important;
+}
+
+.mat-dialog-title {
+  text-align: center;
+}
+
+.mat-dialog-actions {
+  align-items: center;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 0 0.25rem 0.25rem 0 !important;
+}

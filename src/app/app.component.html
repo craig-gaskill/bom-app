@@ -1,0 +1,6 @@
+<div class="app-content">
+  <bom-navigation *ngIf="(isAuthenticated$ | async); else notAuthorized"></bom-navigation>
+  <ng-template #notAuthorized>
+    <router-outlet></router-outlet>
+  </ng-template>
+</div>
