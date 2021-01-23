@@ -1,9 +1,9 @@
-import {Component, ElementRef, HostBinding, HostListener, Input, OnInit, Self, ViewChild} from "@angular/core";
-import {ControlValueAccessor, FormControl, NgControl} from "@angular/forms";
+import {Component, ElementRef, HostBinding, HostListener, Input, OnInit, Self, ViewChild} from '@angular/core';
+import {ControlValueAccessor, FormControl, NgControl} from '@angular/forms';
 
-import {ThemePalette} from "@angular/material/core";
+import {ThemePalette} from '@angular/material/core';
 
-import {ConfigurationService} from "../../../core/configuration/configuration.service";
+import {ConfigurationService} from '../../../core/configuration/configuration.service';
 
 @Component({
   selector: 'bom-email',
@@ -11,6 +11,12 @@ import {ConfigurationService} from "../../../core/configuration/configuration.se
   styleUrls: ['./bom-email.component.scss']
 })
 export class BomEmailComponent implements ControlValueAccessor, OnInit {
+
+  constructor(private _configurationService: ConfigurationService,
+              @Self() public _ngControl: NgControl
+  ) {
+    this._ngControl.valueAccessor = this;
+  }
   @Input() public id: string;
   @Input() public name: string;
   @Input() public label: string;
@@ -30,11 +36,13 @@ export class BomEmailComponent implements ControlValueAccessor, OnInit {
 
   public innerFormControl: FormControl = new FormControl();
 
-  constructor(private _configurationService: ConfigurationService,
-              @Self() public _ngControl: NgControl
-  ) {
-    this._ngControl.valueAccessor = this;
-  }
+  @ViewChild('innerElement')
+  private _innerElement: ElementRef;
+
+  @HostBinding('tabindex')
+  public tabindex = 0;
+
+  public configuration$ = this._configurationService.getConfiguration$();
 
   public ngOnInit(): void {
     if (this._ngControl) {
@@ -43,20 +51,12 @@ export class BomEmailComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  @ViewChild("innerElement")
-  private _innerElement: ElementRef;
-
-  @HostBinding('tabindex')
-  public tabindex = 0;
-
   @HostListener('focus')
   public focus(): void {
     if (this._innerElement) {
       this._innerElement.nativeElement.focus();
     }
   }
-
-  public configuration$ = this._configurationService.getConfiguration$();
 
   public onTouched = () => {};
 

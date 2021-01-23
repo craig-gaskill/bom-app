@@ -1,12 +1,12 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
-import {environment} from "../../../environments/environment";
-import {Role, RoleUtil} from "./role.model";
-import {ObjectUtil} from "../utilities/object.util";
-import {ResponseUtil} from "../utilities/response.util";
+import {environment} from '../../../environments/environment';
+import {Role, RoleUtil} from './role.model';
+import {ObjectUtil} from '../utilities/object.util';
+import {ResponseUtil} from '../utilities/response.util';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +31,12 @@ export class RoleService {
   public getRoles(start = 0, limit = 25, searchText?: string, includeInactive = false
   ): Observable<Role[]> {
     let params = new HttpParams()
-      .set("start", start.toString())
-      .set("limit", limit.toString())
-      .set("includeInactive", includeInactive.toString());
+      .set('start', start.toString())
+      .set('limit', limit.toString())
+      .set('includeInactive', includeInactive.toString());
 
     if (ObjectUtil.isDefined(searchText)) {
-      params = params.set("searchText", searchText);
+      params = params.set('searchText', searchText);
     }
 
     return this._httpClient.get<Role[]>(this._SERVICE_URL, {params})

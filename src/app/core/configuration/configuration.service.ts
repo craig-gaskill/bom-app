@@ -1,20 +1,20 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from 'rxjs';
 
-import {NameFormat} from "./name-format.enum";
-import {Configuration} from "./configuration.model";
-import {ObjectUtil} from "../utilities/object.util";
+import {NameFormat} from './name-format.enum';
+import {Configuration} from './configuration.model';
+import {ObjectUtil} from '../utilities/object.util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigurationService implements OnDestroy {
   private readonly DEFAULT_NAME_FORMAT          = NameFormat.MediumLastFirst;
-  private readonly DEFAULT_DATE_FORMAT          = "mediumDate";
-  private readonly DEFAULT_TIME_FORMAT          = "shortTime";
-  private readonly DEFAULT_DATE_TIME_FORMAT     = "medium";
-  private readonly DEFAULT_COMPONENT_APPEARANCE = "outline";
-  private readonly DEFAULT_FLOAT_LABEL          = "always";
+  private readonly DEFAULT_DATE_FORMAT          = 'mediumDate';
+  private readonly DEFAULT_TIME_FORMAT          = 'shortTime';
+  private readonly DEFAULT_DATE_TIME_FORMAT     = 'medium';
+  private readonly DEFAULT_COMPONENT_APPEARANCE = 'standard';
+  private readonly DEFAULT_FLOAT_LABEL          = 'always';
 
   private readonly DEFAULT_CONFIG: Configuration = {
     nameFormat: this.DEFAULT_NAME_FORMAT,
@@ -85,7 +85,7 @@ export class ConfigurationService implements OnDestroy {
   public changeDateFormat(dateFormat: string): void {
     this._config = {
       nameFormat: this._config.nameFormat,
-      dateFormat:ObjectUtil.valueOrElse(dateFormat, this.DEFAULT_DATE_FORMAT),
+      dateFormat: ObjectUtil.valueOrElse(dateFormat, this.DEFAULT_DATE_FORMAT),
       timeFormat: this._config.timeFormat,
       dateTimeFormat: this._config.dateTimeFormat,
       componentAppearance: this._config.componentAppearance,

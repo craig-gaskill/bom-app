@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {map, takeWhile} from "rxjs/operators";
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map, takeWhile} from 'rxjs/operators';
 
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DEFAULT_INTERRUPTSOURCES, Idle} from "@ng-idle/core";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {DEFAULT_INTERRUPTSOURCES, Idle} from '@ng-idle/core';
 
-import {AuthenticationService, LoginStatus} from "./core/authentication/authentication.service";
-import {environment} from "../environments/environment";
-import {InactiveDialogComponent} from "./security/inactive/inactive-dialog.component";
+import {AuthenticationService, LoginStatus} from './core/authentication/authentication.service';
+import {environment} from '../environments/environment';
+import {InactiveDialogComponent} from './security/inactive/inactive-dialog.component';
 
 @Component({
   selector: 'bom-app',
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if (result === LoginStatus.Valid) {
           this._setupIdleTimers();
         }
-      })
+      });
   }
 
   public ngOnDestroy(): void {
@@ -65,10 +65,10 @@ export class AppComponent implements OnInit, OnDestroy {
         takeWhile(() => this._subscribed)
       )
       .subscribe(() => {
-        this._inactiveDialog = this._dialog.open(InactiveDialogComponent,{
+        this._inactiveDialog = this._dialog.open(InactiveDialogComponent, {
           width: '400px',
           disableClose: true
-        })
+        });
 
         this._inactiveDialog.afterClosed()
           .pipe(
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
             } else {
               this._idle.watch();
             }
-          })
+          });
       });
 
     this._idle.onIdleEnd
@@ -89,7 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         if (this._inactiveDialog) {
-          this._inactiveDialog.close()
+          this._inactiveDialog.close();
           this._inactiveDialog = undefined;
         }
       });

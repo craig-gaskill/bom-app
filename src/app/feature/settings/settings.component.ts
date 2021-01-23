@@ -1,15 +1,13 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
   ActivationStart,
   NavigationStart,
   Router,
   RouterOutlet
-} from "@angular/router";
-import {filter, takeWhile} from "rxjs/operators";
+} from '@angular/router';
+import {filter, takeWhile} from 'rxjs/operators';
 
-import {ObjectUtil} from "../../core/utilities/object.util";
+import {ObjectUtil} from '../../core/utilities/object.util';
 
 @Component({
   selector: 'bom-settings',

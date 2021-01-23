@@ -1,9 +1,11 @@
-import {BaseModel} from "../base.model";
+import {BaseModel} from '../base.model';
+import {RolePermission} from './role-permission.model';
 
 export interface Role extends BaseModel {
   roleId: number;
   name: string;
   fullAccess: boolean;
+  permissions: RolePermission[];
 }
 
 export abstract class RoleUtil {

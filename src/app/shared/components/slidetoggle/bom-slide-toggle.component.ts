@@ -1,14 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostBinding,
-  HostListener,
-  Input, OnDestroy,
-  OnInit,
-  Optional,
-  Self,
-  ViewChild
-} from '@angular/core';
+import {Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, Optional, Self, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormControl, NgControl} from '@angular/forms';
 import {takeWhile} from 'rxjs/operators';
 
@@ -17,11 +7,11 @@ import {ThemePalette} from '@angular/material/core';
 import {ConfigurationService} from '../../../core/configuration/configuration.service';
 
 @Component({
-  selector: 'bom-input',
-  templateUrl: './bom-input.component.html',
-  styleUrls: ['./bom-input.component.scss']
+  selector: 'bom-slide-toggle',
+  templateUrl: './bom-slide-toggle.component.html',
+  styleUrls: ['./bom-slide-toggle.component.scss']
 })
-export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class BomSlideToggleComponent implements ControlValueAccessor, OnInit, OnDestroy {
   constructor(private _configurationService: ConfigurationService,
               @Optional() @Self() private _ngControl: NgControl
   ) {
@@ -34,21 +24,10 @@ export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
   @Input() public id: string;
   @Input() public name: string;
-  @Input() public label: string;
-  @Input() public type = 'text';
+  @Input() public checkedLabel: string;
+  @Input() public uncheckedLabel: string;
   @Input() public editing = false;
-  @Input() public maxlength: number;
-  @Input() public autocomplete: string;
-  @Input() public autofocus = false;
   @Input() public color: ThemePalette;
-  @Input() public hintLabelLeft: string;
-  @Input() public hintLabelRight: string;
-
-  @Input() public minlength: number;
-  @Input() public minlengthErrorMessage: string;
-
-  @Input() public required = false;
-  @Input() public requiredErrorMessage = 'This field is required.';
 
   public innerFormControl: FormControl = new FormControl();
 
@@ -57,8 +36,6 @@ export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
   @HostBinding('tabindex')
   public tabindex = 0;
-
-  public configuration$ = this._configurationService.getConfiguration$();
 
   public ngOnInit(): void {
     if (this._ngControl) {
@@ -82,14 +59,6 @@ export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestro
   public ngOnDestroy(): void {
     this._subscribed = false;
   }
-
-  @HostListener('focus')
-  public focus(): void {
-    if (this._innerElement) {
-      this._innerElement.nativeElement.focus();
-    }
-  }
-
   public onTouched = () => {};
 
   public registerOnChange(fn: any): void {

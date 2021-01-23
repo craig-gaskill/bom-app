@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
-import {Dictionary} from "../../../core/dictionary/dictionary.model";
-import {DictionariesManager} from "./dictionaries.manager";
-import {ViewStatus} from "../../../app-store.state";
+import {Dictionary} from '../../../core/dictionary/dictionary.model';
+import {DictionariesManager} from './dictionaries.manager';
+import {ViewStatus} from '../../../app-store.state';
 
 @Component({
   selector: 'bom-dictionaries',
@@ -12,8 +12,6 @@ import {ViewStatus} from "../../../app-store.state";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DictionariesComponent implements OnInit, OnDestroy {
-  public readonly VIEW_STATUS = ViewStatus;
-
   public dictionaries$: Observable<Dictionary[]>;
   public viewStatus$: Observable<ViewStatus>;
   public expandedMeaning: string;

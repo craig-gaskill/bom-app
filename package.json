@@ -25,7 +25,6 @@
     "@ngrx/effects": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
-    "angularx-social-login": "^3.0.0",
     "date-fns": "^2.16.1",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",

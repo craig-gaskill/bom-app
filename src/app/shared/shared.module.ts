@@ -5,13 +5,14 @@ import {A11yModule} from '@angular/cdk/a11y';
 
 import {MaterialModule} from './material.module';
 
-import {ProcessingSpinnerDirective} from "./directive/processing-spinner.directive";
-import {EmailInUseValidator} from "./validator/email-in-use.validator";
-import {MustMatchValidator} from "./validator/must-match.validator";
-import {ConfirmationDialogComponent} from "./confirmation/confirmation-dialog.component";
+import {ProcessingSpinnerDirective} from './directive/processing-spinner.directive';
+import {EmailInUseValidator} from './validator/email-in-use.validator';
+import {MustMatchValidator} from './validator/must-match.validator';
+import {ConfirmationDialogComponent} from './confirmation/confirmation-dialog.component';
 
-import {BomEmailComponent} from "./components/email/bom-email.component";
-import {BomInputComponent} from "./components/input/bom-input.component";
+import {BomInputModule} from './components/input/bom-input.module';
+import {BomEmailModule} from './components/email/bom-email.module';
+import {BomSlideToggleModule} from './components/slidetoggle/bom-slide-toggle.module';
 
 @NgModule({
   imports: [
@@ -19,33 +20,33 @@ import {BomInputComponent} from "./components/input/bom-input.component";
     FormsModule,
     ReactiveFormsModule,
     A11yModule,
+    MaterialModule,
 
-    MaterialModule
+    BomInputModule,
+    BomEmailModule,
+    BomSlideToggleModule
   ],
   declarations: [
     ProcessingSpinnerDirective,
     EmailInUseValidator,
     MustMatchValidator,
-    ConfirmationDialogComponent,
-
-    BomEmailComponent,
-    BomInputComponent
+    ConfirmationDialogComponent
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     A11yModule,
-
     MaterialModule,
+
+    BomInputModule,
+    BomEmailModule,
+    BomSlideToggleModule,
 
     ProcessingSpinnerDirective,
     EmailInUseValidator,
     MustMatchValidator,
-    ConfirmationDialogComponent,
-
-    BomEmailComponent,
-    BomInputComponent
+    ConfirmationDialogComponent
   ]
 })
 export class SharedModule { }

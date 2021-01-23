@@ -1,0 +1,6 @@
+<mat-slide-toggle [color]="color"
+                  [formControl]="innerFormControl"
+                  #innerElement
+                  (blur)="onTouched()">
+  {{innerFormControl.value ? checkedLabel : uncheckedLabel}}
+</mat-slide-toggle>

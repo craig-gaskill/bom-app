@@ -1,7 +1,7 @@
-import {MatFormFieldAppearance} from "@angular/material/form-field";
-import {FloatLabelType} from "@angular/material/form-field/form-field";
+import {MatFormFieldAppearance} from '@angular/material/form-field';
+import {FloatLabelType} from '@angular/material/form-field/form-field';
 
-import {NameFormat} from "./name-format.enum";
+import {NameFormat} from './name-format.enum';
 
 /**
  * Defines how the system should appear to the user.
@@ -22,7 +22,7 @@ export interface Configuration {
   /**
    * The format to use when formatting a time-only field.
    */
-  timeFormat: string
+  timeFormat: string;
 
   /**
    * The format to use when formatting a date and time field.
