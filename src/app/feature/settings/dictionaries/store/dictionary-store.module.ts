@@ -3,13 +3,14 @@ import {CommonModule} from '@angular/common';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 
+import {DictionaryStoreEffects} from './dictionary-store.effects';
 import {dictionaryReducer} from './dictionary-store.reducer';
-import {DictionaryStoreEffects} from "./dictionary-store.effects";
+import {dictionaryFeature} from './dictionary-store.state';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('dictionaryStore', dictionaryReducer),
+    StoreModule.forFeature(dictionaryFeature, dictionaryReducer),
     EffectsModule.forFeature([DictionaryStoreEffects])
   ],
   providers: [

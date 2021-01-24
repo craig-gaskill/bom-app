@@ -4,12 +4,16 @@ import {Observable} from 'rxjs';
 
 import {DictionaryState} from './store/dictionary-store.state';
 import {
-  selectAllDictionaries, selectAllDictionaryValues,
-  selectDictionaryLoadStatus, selectDictionaryViewStatus,
+  selectAllDictionaries,
+  selectAllDictionaryValues,
+  selectDictionaryLoadStatus,
+  selectDictionaryViewStatus,
 } from './store/dictionary-store.selectors';
 import {
-  dictionaryValueAdd, dictionaryValueCancel,
-  dictionaryValueDelete, dictionaryValueEdit,
+  dictionaryValueAdd,
+  dictionaryValueCancel,
+  dictionaryValueDelete,
+  dictionaryValueEdit,
   dictionaryValueSave,
   loadDictionaries,
   loadDictionaryValues,
@@ -17,8 +21,8 @@ import {
   resetDictionaryValues
 } from './store/dictionary-store.actions';
 import {LoadStatus, ViewStatus} from '../../../app-store.state';
-import {Dictionary} from "../../../core/dictionary/dictionary.model";
-import {DictionaryValue} from "../../../core/dictionary/value/dictionary-value.model";
+import {Dictionary} from '../../../core/dictionary/dictionary.model';
+import {DictionaryValue} from '../../../core/dictionary/value/dictionary-value.model';
 
 @Injectable({
   providedIn: 'root'

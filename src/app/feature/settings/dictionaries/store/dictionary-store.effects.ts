@@ -5,17 +5,26 @@ import {catchError, exhaustMap, map, tap, withLatestFrom} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
 
 import {
-  dictionaryValueDelete, dictionaryValueDeleted, dictionaryValueDeleteFailed,
-  dictionaryValueSave, dictionaryValueCreated, dictionaryValueUpdated, dictionaryValueSaveFailed,
-  loadDictionaries, loadDictionariesFailed, loadDictionariesSucceeded,
-  loadDictionaryValues, loadDictionaryValuesFailed, loadDictionaryValuesSucceeded
+  dictionaryValueCreated,
+  dictionaryValueDelete,
+  dictionaryValueDeleted,
+  dictionaryValueDeleteFailed,
+  dictionaryValueSave,
+  dictionaryValueSaveFailed,
+  dictionaryValueUpdated,
+  loadDictionaries,
+  loadDictionariesFailed,
+  loadDictionariesSucceeded,
+  loadDictionaryValues,
+  loadDictionaryValuesFailed,
+  loadDictionaryValuesSucceeded
 } from './dictionary-store.actions';
 import {selectDictionaryValueStates} from './dictionary-store.selectors';
 import {DictionaryState} from './dictionary-store.state';
 import {LoadStatus} from '../../../../app-store.state';
-import {DictionaryService} from "../../../../core/dictionary/dictionary.service";
-import {DictionaryValueService} from "../../../../core/dictionary/value/dictionary-value.service";
-import {NotificationService} from "../../../../core/notification/notification.service";
+import {DictionaryService} from '../../../../core/dictionary/dictionary.service';
+import {DictionaryValueService} from '../../../../core/dictionary/value/dictionary-value.service';
+import {NotificationService} from '../../../../core/notification/notification.service';
 
 @Injectable()
 export class DictionaryStoreEffects {

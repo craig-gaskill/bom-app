@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 
 import {Dictionary} from '../../../core/dictionary/dictionary.model';
 import {DictionariesManager} from './dictionaries.manager';
-import {ViewStatus} from '../../../app-store.state';
 
 @Component({
   selector: 'bom-dictionaries',
@@ -13,14 +12,12 @@ import {ViewStatus} from '../../../app-store.state';
 })
 export class DictionariesComponent implements OnInit, OnDestroy {
   public dictionaries$: Observable<Dictionary[]>;
-  public viewStatus$: Observable<ViewStatus>;
   public expandedMeaning: string;
 
   constructor(private _dictionariesManager: DictionariesManager) { }
 
   public ngOnInit(): void {
     this.dictionaries$ = this._dictionariesManager.selectAllDictionaries();
-    this.viewStatus$   = this._dictionariesManager.getViewStatus();
 
     this._dictionariesManager.loadAllDictionaries();
   }

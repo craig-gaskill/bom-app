@@ -1,7 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
-import {Dictionary} from "../../../../core/dictionary/dictionary.model";
-import {DictionaryState, DictionaryValueState} from './dictionary-store.state';
+import {Dictionary} from '../../../../core/dictionary/dictionary.model';
+import {dictionaryFeature, DictionaryState, DictionaryValueState} from './dictionary-store.state';
 import {LoadStatus, ViewStatus} from '../../../../app-store.state';
 
 const getAllDictionaries       = (state: DictionaryState): Dictionary[] => state.dictionaries;
@@ -10,7 +10,7 @@ const getDictionaryLoadError   = (state: DictionaryState): string => state.dicti
 const getDictionaryValueStates = (state: DictionaryState): DictionaryValueState[] => state.dictionaryValueStates;
 const getDictionaryViewStatus  = (state: DictionaryState): ViewStatus => state.dictionaryViewStatus;
 
-const selectDictionaryState      = createFeatureSelector<DictionaryState>('dictionaryStore');
+const selectDictionaryState      = createFeatureSelector<DictionaryState>(dictionaryFeature);
 
 export const selectAllDictionaries      = createSelector(selectDictionaryState, getAllDictionaries);
 export const selectDictionaryLoadStatus = createSelector(selectDictionaryState, getDictionaryLoadStatus);

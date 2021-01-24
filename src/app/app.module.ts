@@ -18,6 +18,7 @@ import {HomeComponent} from './feature/home/home.component';
 import {LoginComponent} from './security/login/login.component';
 import {RegisterComponent} from './security/register/register.component';
 import {InactiveDialogComponent} from './security/inactive/inactive-dialog.component';
+import {SimulateThrottlingInterceptor} from './core/interceptor/simulate-throttling.interceptor';
 
 @NgModule({
   imports: [
@@ -47,6 +48,11 @@ import {InactiveDialogComponent} from './security/inactive/inactive-dialog.compo
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TimeZoneInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SimulateThrottlingInterceptor,
       multi: true
     }
   ],

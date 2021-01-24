@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  bomServiceUrl: "http://localhost:9001",
+  bomServiceUrl: 'http://localhost:9001',
   idleInactiveSeconds: 10 * 60,
   idleTimeoutSeconds: 5 * 60
 };

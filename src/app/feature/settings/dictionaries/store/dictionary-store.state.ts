@@ -1,6 +1,8 @@
-import {Dictionary} from "../../../../core/dictionary/dictionary.model";
-import {DictionaryValue} from "../../../../core/dictionary/value/dictionary-value.model";
-import {LoadStatus, ViewStatus} from "../../../../app-store.state";
+import {Dictionary} from '../../../../core/dictionary/dictionary.model';
+import {DictionaryValue} from '../../../../core/dictionary/value/dictionary-value.model';
+import {LoadStatus, ViewStatus} from '../../../../app-store.state';
+
+export const dictionaryFeature = 'dictionaryFeature';
 
 export interface DictionaryValueState {
   dictionaryMeaning: string;

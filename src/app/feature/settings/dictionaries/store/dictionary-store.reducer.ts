@@ -2,13 +2,24 @@ import {Action, createReducer, on} from '@ngrx/store';
 
 import {DictionaryState, DictionaryValueState, initialDictionaryState} from './dictionary-store.state';
 import {
-  dictionaryValueAdd, dictionaryValueCancel, dictionaryValueCreated, dictionaryValueUpdated, dictionaryValueDeleted,
-  loadDictionaries, loadDictionariesFailed, loadDictionariesSucceeded,
-  loadDictionaryValues, loadDictionaryValuesFailed, loadDictionaryValuesSucceeded,
-  resetDictionaries, resetDictionaryValues, dictionaryValueEdit
+  dictionaryValueAdd,
+  dictionaryValueCancel,
+  dictionaryValueCreated,
+  dictionaryValueDeleted,
+  dictionaryValueEdit,
+  dictionaryValueUpdated,
+  loadDictionaries,
+  loadDictionariesFailed,
+  loadDictionariesSucceeded,
+  loadDictionaryValues,
+  loadDictionaryValuesFailed,
+  loadDictionaryValuesSucceeded,
+  resetDictionaries,
+  resetDictionaryValues
 } from './dictionary-store.actions';
 import {LoadStatus, ViewStatus} from '../../../../app-store.state';
-import {DictionaryValue} from "../../../../core/dictionary/value/dictionary-value.model";
+import {DictionaryValue} from '../../../../core/dictionary/value/dictionary-value.model';
+import {ArrayUtil} from '../../../../core/utilities/array.util';
 
 const reducer = createReducer(initialDictionaryState,
   on(loadDictionaries, (state) => ({
@@ -20,7 +31,7 @@ const reducer = createReducer(initialDictionaryState,
   on(loadDictionariesSucceeded, (state, action) => ({
     ...state,
     dictionaries: action.dictionaries,
-    dictionariesLoadStatus: (action.dictionaries && action.dictionaries.length > 0 ? LoadStatus.Loaded : LoadStatus.NoContent)
+    dictionariesLoadStatus: (ArrayUtil.isNotEmpty(action.dictionaries) ? LoadStatus.Loaded : LoadStatus.NoContent)
   })),
   on(loadDictionariesFailed, (state, action) => ({
     ...state,
