@@ -1,10 +1,7 @@
+@charset "UTF-8";
+
 :host {
-  display: flex;
+  display: block;
   height: 100%;
   width: 100%;
-
-  .app-content {
-    height: 100%;
-    width: 100%;
-  }
 }

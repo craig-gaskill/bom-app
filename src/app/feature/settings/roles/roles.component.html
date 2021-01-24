@@ -1,4 +1,4 @@
-<mat-accordion>
+<mat-accordion processingSpinner [showSpinner]="(loadStatus$ | async) === LOAD_STATUSES.Loading">
   <mat-expansion-panel *ngFor="let role of roles$ | async"
                        (opened)="onExpandRole(role.roleId)">
     <mat-expansion-panel-header>

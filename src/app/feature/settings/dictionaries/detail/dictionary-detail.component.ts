@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Dictionary} from '../../../../core/dictionary/dictionary.model';
 import {DictionaryValue} from '../../../../core/dictionary/value/dictionary-value.model';
 import {DictionariesManager} from '../dictionaries.manager';
+import {LoadStatus} from '../../../../app-store.state';
 
 @Component({
   selector: 'bom-dictionary-detail',
@@ -12,7 +13,10 @@ import {DictionariesManager} from '../dictionaries.manager';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DictionaryDetailComponent implements OnInit {
+  public readonly LOAD_STATUSES = LoadStatus;
+
   public dictionaryValues$: Observable<DictionaryValue[]>;
+  public loadStatus$: Observable<LoadStatus>;
 
   @Input()
   public dictionary: Dictionary;
@@ -21,6 +25,6 @@ export class DictionaryDetailComponent implements OnInit {
 
   public ngOnInit(): void {
     this.dictionaryValues$ = this._dictionariesManager.selectAllDictionaryValues(this.dictionary.meaning);
-    this._dictionariesManager.loadAllDictionaryValues(this.dictionary.meaning);
+    this.loadStatus$ = this._dictionariesManager.loadAllDictionaryValues(this.dictionary.meaning);
   }
 }

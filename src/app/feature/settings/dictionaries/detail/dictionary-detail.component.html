@@ -1,4 +1,4 @@
-<mat-accordion displayMode="flat">
+<mat-accordion displayMode="flat" processingSpinner [showSpinner]="(loadStatus$ | async) === LOAD_STATUSES.Loading">
   <mat-expansion-panel *ngFor="let value of dictionaryValues$ | async"
                        [expanded]="!value.dictionaryValueId">
     <mat-expansion-panel-header>

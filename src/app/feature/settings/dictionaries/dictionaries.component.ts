@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 
 import {Dictionary} from '../../../core/dictionary/dictionary.model';
 import {DictionariesManager} from './dictionaries.manager';
+import {LoadStatus} from '../../../app-store.state';
 
 @Component({
   selector: 'bom-dictionaries',
@@ -11,7 +12,10 @@ import {DictionariesManager} from './dictionaries.manager';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DictionariesComponent implements OnInit, OnDestroy {
+  public readonly LOAD_STATUSES = LoadStatus;
+
   public dictionaries$: Observable<Dictionary[]>;
+  public loadStatus$: Observable<LoadStatus>;
   public expandedMeaning: string;
 
   constructor(private _dictionariesManager: DictionariesManager) { }
@@ -19,7 +23,7 @@ export class DictionariesComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.dictionaries$ = this._dictionariesManager.selectAllDictionaries();
 
-    this._dictionariesManager.loadAllDictionaries();
+    this.loadStatus$ = this._dictionariesManager.loadAllDictionaries();
   }
 
   public ngOnDestroy(): void {

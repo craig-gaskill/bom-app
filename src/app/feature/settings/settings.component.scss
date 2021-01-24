@@ -1,7 +1,20 @@
-a {
-  text-decoration: none;
-}
+@charset "UTF-8";
 
-.active-link {
-  color: #ef6c00;
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+
+  a {
+    text-decoration: none;
+  }
+
+  .active-link {
+    color: #ef6c00;
+  }
+
+  mat-list {
+    flex: 1;
+  }
 }

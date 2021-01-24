@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 
 import {Role} from '../../../core/role/role.model';
 import {RolesManager} from './roles.manager';
+import {LoadStatus} from '../../../app-store.state';
 
 @Component({
   selector: 'bom-roles',
@@ -11,7 +12,10 @@ import {RolesManager} from './roles.manager';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RolesComponent implements OnInit, OnDestroy {
+  public readonly LOAD_STATUSES = LoadStatus;
+
   public roles$: Observable<Role[]>;
+  public loadStatus$: Observable<LoadStatus>;
   public expandedRoleId: number;
 
   constructor(private _rolesManager: RolesManager) { }
@@ -19,7 +23,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.roles$ = this._rolesManager.selectAllRoles();
 
-    this._rolesManager.loadAllRoles();
+    this.loadStatus$ = this._rolesManager.loadAllRoles();
   }
 
   public ngOnDestroy(): void {
