@@ -1,9 +1,9 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {RouterModule, Routes} from "@angular/router";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
 
-import {SettingsComponent} from "./settings.component";
-import {AuthenticationGuard} from "../../security/guards/authentication.guard";
+import {SettingsComponent} from './settings.component';
+import {AuthenticationGuard} from '../../security/guards/authentication.guard';
 
 const settingsRoutes: Routes = [
   {
@@ -29,7 +29,7 @@ const settingsRoutes: Routes = [
       }
     ]
   }
-]
+];
 
 @NgModule({
   imports: [

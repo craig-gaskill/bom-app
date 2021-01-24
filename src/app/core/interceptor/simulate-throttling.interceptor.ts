@@ -12,7 +12,7 @@ export class SimulateThrottlingInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
       .pipe(
-        delay(this.production ? 0 : 10000)
+        delay(this.production ? 0 : 1000)
       );
   }
 }

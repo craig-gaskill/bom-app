@@ -14,7 +14,8 @@
     color: #ef6c00;
   }
 
-  mat-list {
+  .settings-container {
     flex: 1;
+    overflow-x: scroll;
   }
 }
