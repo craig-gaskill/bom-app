@@ -12,16 +12,6 @@
   width: 10rem;
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
-}
-
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
 .nav-item-description {
   padding-left: 0.5rem;
 }
@@ -29,8 +19,4 @@
 mat-sidenav-content {
   padding: 0.5rem;
   height: calc(100% - 1rem);
-}
-
-.active-link {
-  color: #ef6c00;
 }

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="role$ | async">
   <bom-slide-toggle color="accent"
                     checkedLabel="Full Access"
                     uncheckedLabel="Partial Access">

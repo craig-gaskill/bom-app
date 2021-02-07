@@ -25,7 +25,7 @@
            [required]="required"
            [formControl]="innerFormControl"
            #innerElement
-           (blur)="onTouched()">
+           (blur)="onTouched()" />
 
     <ng-content matSuffix select="[suffix]"></ng-content>
     <mat-hint align="end" *ngIf="hintLabelRight">{{hintLabelRight}}</mat-hint>

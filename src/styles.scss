@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-//@import "theme";
+@import '~@angular/material/theming';
 @import "material-theme";
 @import "material-typography";
 
@@ -31,4 +31,17 @@ body {
 
 .notify-failure {
   background-color: crimson;
+}
+
+//@mixin bom-active-link-color($config-or-theme) {
+//  $config: mat-get-color-config($config-or-theme);
+//  $accent: map-get($config, accent);
+//
+//  .active-link {
+//    color: mat-color($accent, text);
+//  }
+//}
+
+.active-link {
+  color: #ff9800 !important;
 }

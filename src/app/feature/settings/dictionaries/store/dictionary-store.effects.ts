@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {Store} from '@ngrx/store';
 import {catchError, exhaustMap, map, tap, withLatestFrom} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
+
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Store} from '@ngrx/store';
 
 import {
   dictionaryValueCreated,
@@ -61,7 +62,7 @@ export class DictionaryStoreEffects {
       exhaustMap(([action, states]) => {
         const vs = states.find(dvs => dvs.dictionaryMeaning === action.dictionaryMeaning);
         if (vs && (vs.dictionaryValuesLoadStatus === LoadStatus.Loaded || vs.dictionaryValuesLoadStatus === LoadStatus.NoContent)) {
-          return EMPTY;
+          return of(loadDictionaryValuesSucceeded({dictionaryMeaning: action.dictionaryMeaning, values: vs.dictionaryValues}));
         } else {
           return this._dictionaryValueService.getDictionaryValues(action.dictionaryMeaning, 0, 0)
             .pipe(
