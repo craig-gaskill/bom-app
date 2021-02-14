@@ -21,5 +21,5 @@ export const initialRoleStoreState: RoleStoreState = {
   roles: undefined,
   rolesLoadStatus: undefined,
   rolesLoadError: undefined,
-  roleStates: undefined
+  roleStates: []
 };

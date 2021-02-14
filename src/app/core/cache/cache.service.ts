@@ -9,8 +9,10 @@ import {Cache} from './cache';
  * reduce the number of calls to the back-end for frequently accessed
  * resources (e.g. getUserById, getInsuranceById, getStaffById, etc.).
  */
-@Injectable()
-export class CacheManager {
+@Injectable({
+  providedIn: 'root'
+})
+export class CacheService {
   private readonly _CACHES: Map<string, Cache> = new Map<string, Cache>();
 
   /**
@@ -50,10 +52,7 @@ export class CacheManager {
     if (this._CACHES.has(name)) {
       return this._CACHES.get(name);
     } else if (create) {
-      const cache = new Cache(name, maxAge);
-      this._CACHES.set(name, cache);
-
-      return cache;
+      return this.createCache(name, maxAge);
     } else {
       return undefined;
     }
@@ -72,7 +71,7 @@ export class CacheManager {
   }
 
   /**
-   * Will clear / delete all existing caches.
+   * Will clear / delete all existing values inn all the caches.
    */
   public clearAll(): void {
     this._CACHES.forEach(cache => cache.clear());

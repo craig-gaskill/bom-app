@@ -1,11 +1,20 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {EMPTY, Observable, of} from 'rxjs';
-import {catchError, takeWhile} from 'rxjs/operators';
+import {takeWhile} from 'rxjs/operators';
+import {ReplaySubject} from 'rxjs';
 
 import {Role} from '../../../../core/role/role.model';
-import {RoleService} from '../../../../core/role/role.service';
 import {NotificationService} from '../../../../core/notification/notification.service';
-import {ArrayUtil} from '../../../../core/utilities/array.util';
+import {RolesManager} from '../roles.manager';
+
+export interface RolePermission {
+  key: string;
+  permission: RolePermission;
+  isLeaf: boolean;
+  hasViewPermission: boolean;
+  hasAddPermission: boolean;
+  hasEditPermission: boolean;
+  hasDeletePermission: boolean;
+}
 
 @Component({
   selector: 'bom-role-detail',
@@ -15,27 +24,31 @@ import {ArrayUtil} from '../../../../core/utilities/array.util';
 })
 export class RoleDetailComponent implements OnInit, OnDestroy {
   private _subscribed = true;
+  private _sections: Map<string, RolePermission> = new Map<string, RolePermission>();
 
   @Input()
-  public role: Role;
+  public roleId: number;
 
-  public role$: Observable<Role>;
+  public role$: ReplaySubject<Role> = new ReplaySubject<Role>(1);
 
-  constructor(private _roleService: RoleService,
+  constructor(private _roleManager: RolesManager,
               private _notificationService: NotificationService
   ) { }
 
   public ngOnInit(): void {
-    this.role$ = ArrayUtil.isNotEmpty(this.role.permissions) ?
-      of(this.role) :
-      this._roleService.getRole(this.role.roleId, ['permissions'])
-        .pipe(
-          takeWhile(() => this._subscribed),
-          catchError(() => {
-            this._notificationService.failure('Failed to retrieve Role');
-            return EMPTY;
-          })
-        );
+    this._roleManager.loadRole(this.roleId);
+
+    this._roleManager.selectRole(this.roleId)
+      .pipe(
+        takeWhile(() => this._subscribed)
+      )
+      .subscribe(result => {
+        result.permissions.forEach(permission => {
+          const parts = permission.code.split('.');
+        });
+
+        this.role$.next(result);
+      });
   }
 
   public ngOnDestroy(): void {
