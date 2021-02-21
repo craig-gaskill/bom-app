@@ -21,7 +21,7 @@ export abstract class ObjectUtil {
    *    [true] if not null or not undefined. false if null or undefined.
    */
   public static isDefined(value: any): boolean {
-    return (value !== undefined && value !== null);
+    return !ObjectUtil.isUndefined(value);
   }
 
   /**
@@ -41,7 +41,7 @@ export abstract class ObjectUtil {
    *    [true] if the value is either null or undefined.
    */
   public static isUndefined(value: any): boolean {
-    return !ObjectUtil.isDefined(value);
+    return (value === undefined || value === null);
   }
 
   /**
