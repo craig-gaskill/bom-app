@@ -14,14 +14,14 @@ export abstract class ObjectUtil {
    * false      = true;
    * ""         = true;
    *
-   * @param data
+   * @param value
    *    The value to validate.
    *
    * @returns
    *    [true] if not null or not undefined. false if null or undefined.
    */
-  public static isDefined(data: any): boolean {
-    return (data !== undefined);
+  public static isDefined(value: any): boolean {
+    return (value !== undefined && value !== null);
   }
 
   /**
@@ -34,27 +34,27 @@ export abstract class ObjectUtil {
    * false      = false;
    * ""         = false;
    *
-   * @param data
+   * @param value
    *    The value to validate.
    *
    * @returns
    *    [true] if the value is either null or undefined.
    */
-  public static isUndefined(data: any): boolean {
-    return data === undefined;
+  public static isUndefined(value: any): boolean {
+    return !ObjectUtil.isDefined(value);
   }
 
   /**
    * Will return the value if it is defined and non-null; otherwise, it will return the 'other' value.
    *
-   * @param data
+   * @param value
    *    The value to validate.
    * @param other
    *    The value to return if the specified 'data' is undefined or null.
    *
    * @return The original value (if defined and non-null); otherwise, the 'other' value.
    */
-  public static valueOrElse(data: any, other: any): any {
-    return ObjectUtil.isDefined(data) ? data : other;
+  public static valueOrElse(value: any, other: any): any {
+    return ObjectUtil.isDefined(value) ? value : other;
   }
 }

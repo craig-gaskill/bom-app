@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {ValueComponent} from './dictionary-value.component';
+import {DictionaryValueComponent} from './dictionary-value.component';
 
 describe('ValueComponent', () => {
-  let component: ValueComponent;
-  let fixture: ComponentFixture<ValueComponent>;
+  let component: DictionaryValueComponent;
+  let fixture: ComponentFixture<DictionaryValueComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ValueComponent ]
+      declarations: [ DictionaryValueComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ValueComponent);
+    fixture = TestBed.createComponent(DictionaryValueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

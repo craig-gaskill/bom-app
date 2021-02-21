@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Observable} from 'rxjs';
 
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 
-import {ViewStatus} from "../../../../../app-store.state";
-import {DictionaryValue} from "../../../../../core/dictionary/value/dictionary-value.model";
-import {DictionariesManager} from "../../dictionaries.manager";
-import {ConfirmDialogData} from "../../../../../shared/confirmation/confirmation-dialog.component";
-import {ConfirmationDialogComponent} from "../../../../../shared/confirmation/confirmation-dialog.component";
+import {ViewStatus} from '../../../../../app-store.state';
+import {DictionaryValue} from '../../../../../core/dictionary/value/dictionary-value.model';
+import {DictionariesManager} from '../../dictionaries.manager';
+import {ConfirmDialogData} from '../../../../../shared/confirmation/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from '../../../../../shared/confirmation/confirmation-dialog.component';
 
 @Component({
   selector: 'bom-dictionary-value',

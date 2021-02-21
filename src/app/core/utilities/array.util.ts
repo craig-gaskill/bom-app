@@ -3,33 +3,26 @@
  *
  * @author Craig Gaskill
  */
-import {ObjectUtil} from './object.util';
 
 export abstract class ArrayUtil {
   /**
    * Checks whether the given parameter is defined (not null or undefined)
    * is an array and has elements.
    *
-   * @param ary
+   * @param value
    *    The value to validate
    */
-  public static isEmpty(ary: any[]): boolean {
-    if (ObjectUtil.isUndefined(ary)) {
-      return true;
-    } else if (!(ary instanceof Array)) {
-      return true;
-    } else {
-      return ary.length === 0;
-    }
+  public static isEmpty(value: any): boolean {
+    return !(value instanceof Array) || value.length === 0;
   }
 
   /**
    * Checks whether the given parameter is not empty (is defined and has values).
    *
-   * @param ary
+   * @param value
    *    Thew value to validate
    */
-  public static isNotEmpty(ary: any[]): boolean {
-    return !this.isEmpty(ary);
+  public static isNotEmpty(value: any): boolean {
+    return !this.isEmpty(value);
   }
 }
