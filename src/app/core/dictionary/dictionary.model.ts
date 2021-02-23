@@ -1,10 +1,10 @@
-import {BaseModel} from "../base.model";
+import {BaseModel} from '../base.model';
 
 export interface Dictionary extends BaseModel {
   dictionaryId: number;
   display: string;
   meaning: string;
-  description: string;
+  description?: string;
   viewable: boolean;
   editable: boolean;
   deletable: boolean;

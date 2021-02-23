@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {Dictionary} from '../../../../core/dictionary/dictionary.model';
@@ -12,8 +12,10 @@ import {LoadStatus} from '../../../../app-store.state';
   styleUrls: ['./dictionary-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DictionaryDetailComponent implements OnInit {
+export class DictionaryDetailComponent implements OnInit, OnDestroy {
   public readonly LOAD_STATUSES = LoadStatus;
+
+  private _subscribed = true;
 
   public dictionaryValues$: Observable<DictionaryValue[]>;
   public loadStatus$: Observable<LoadStatus>;
@@ -26,5 +28,9 @@ export class DictionaryDetailComponent implements OnInit {
   public ngOnInit(): void {
     this.dictionaryValues$ = this._dictionariesManager.selectAllDictionaryValues(this.dictionary.meaning);
     this.loadStatus$ = this._dictionariesManager.loadAllDictionaryValues(this.dictionary.meaning);
+  }
+
+  public ngOnDestroy(): void {
+    this._subscribed = false;
   }
 }

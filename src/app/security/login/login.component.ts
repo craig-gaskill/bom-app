@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpErrorResponse} from "@angular/common/http";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {finalize, takeWhile} from "rxjs/operators";
+import {HttpErrorResponse} from '@angular/common/http';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {finalize, takeWhile} from 'rxjs/operators';
 
-import {AuthenticationService, LoginStatus} from "../../core/authentication/authentication.service";
+import {AuthenticationService, LoginStatus} from '../../core/authentication/authentication.service';
 
 @Component({
   selector: 'bom-login',

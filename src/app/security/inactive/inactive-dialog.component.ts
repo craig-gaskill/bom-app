@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Idle} from "@ng-idle/core";
-import {formatDuration} from "date-fns";
+import {Idle} from '@ng-idle/core';
+import {formatDuration} from 'date-fns';
 
 @Component({
   selector: 'bom-inactive-dialog',
@@ -18,7 +18,7 @@ export class InactiveDialogComponent implements OnInit {
       const minutes = Math.floor(countdown / 60);
       const seconds = countdown % 60;
 
-      this.message = `You will be timed out in ${formatDuration({minutes: minutes, seconds: seconds})}!`
+      this.message = `You will be timed out in ${formatDuration({minutes, seconds})}!`;
     });
   }
 }

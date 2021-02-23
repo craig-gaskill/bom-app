@@ -1,6 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
+import {StoreModule} from '@ngrx/store';
 import {DictionariesComponent} from './dictionaries.component';
+import {SharedModule} from '../../../shared/shared.module';
+import {dictionaryFeature} from './store/dictionary-store.state';
+import {dictionaryReducer} from './store/dictionary-store.reducer';
 
 describe('DictionariesComponent', () => {
   let component: DictionariesComponent;
@@ -8,7 +12,14 @@ describe('DictionariesComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DictionariesComponent ]
+      imports: [
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(dictionaryFeature, dictionaryReducer),
+        SharedModule
+      ],
+      declarations: [
+        DictionariesComponent
+      ]
     })
     .compileComponents();
   }));

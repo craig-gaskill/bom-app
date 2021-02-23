@@ -1,14 +1,25 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import {StoreModule} from '@ngrx/store';
 import {DictionaryValueComponent} from './dictionary-value.component';
+import {dictionaryFeature} from '../../store/dictionary-store.state';
+import {dictionaryReducer} from '../../store/dictionary-store.reducer';
+import {SharedModule} from '../../../../../shared/shared.module';
 
-describe('ValueComponent', () => {
+describe('DictionaryValueComponent', () => {
   let component: DictionaryValueComponent;
   let fixture: ComponentFixture<DictionaryValueComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DictionaryValueComponent ]
+      imports: [
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(dictionaryFeature, dictionaryReducer),
+        SharedModule
+      ],
+      declarations: [
+        DictionaryValueComponent
+      ]
     })
     .compileComponents();
   }));

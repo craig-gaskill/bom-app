@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
+import {NgIdleModule} from '@ng-idle/core';
 import {InactiveDialogComponent} from './inactive-dialog.component';
 
 describe('InactiveDialogComponent', () => {
@@ -8,7 +9,12 @@ describe('InactiveDialogComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InactiveDialogComponent ]
+      imports: [
+        NgIdleModule
+      ],
+      declarations: [
+        InactiveDialogComponent
+      ]
     })
     .compileComponents();
   }));
