@@ -128,17 +128,17 @@
     "ora" "5.3.0"
     "rxjs" "6.6.3"
 
-"@angular/animations@~11.2.3", "@angular/animations@11.2.3":
+"@angular/animations@^11.0.0 || ^12.0.0-0", "@angular/animations@~11.2.3", "@angular/animations@11.2.3":
   "integrity" "sha512-Z6sHIeTeeZrRAW83NI7FO7THF50cPCFkkuvVah3qmCqopY6FuoHKUBEENyGzQGH69LbGFYhEppY8KM/6JtVF6Q=="
   "resolved" "https://registry.npmjs.org/@angular/animations/-/animations-11.2.3.tgz"
   "version" "11.2.3"
   dependencies:
     "tslib" "^2.0.0"
 
-"@angular/cdk@^11.0.3":
-  "integrity" "sha512-hgbJXvZURKBnZawwxUrsZE/3a+HCJh2UhoLIng3cn5Q+WIW/4a37knDl8B9DYKBWrCqeINXNcUHVSKkWc/gjCA=="
-  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-11.0.3.tgz"
-  "version" "11.0.3"
+"@angular/cdk@^11.2.2", "@angular/cdk@11.2.2":
+  "integrity" "sha512-p3lRDPlnOuJtLWEd020QOyn0ERyc1LF7OLi90hTdzMMxe9fT3v6sQJVRs8jIY3NTmpIm/pNDGi77+1/vKerLPQ=="
+  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-11.2.2.tgz"
+  "version" "11.2.2"
   dependencies:
     "tslib" "^2.0.0"
   optionalDependencies:
@@ -172,7 +172,7 @@
     "universal-analytics" "0.4.23"
     "uuid" "8.3.2"
 
-"@angular/common@~11.2.3", "@angular/common@11.2.3":
+"@angular/common@^11.0.0 || ^12.0.0-0", "@angular/common@~11.2.3", "@angular/common@11.2.3":
   "integrity" "sha512-51gVmr942SZtAFmhVfp7/3fcTQ+Tia7UxWjv6iUtYF3oCvTWbo/J1zki2VNSfmMNKJV8MaMq6XUw8UWbHA0sgQ=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-11.2.3.tgz"
   "version" "11.2.3"
@@ -212,7 +212,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^11.0.0", "@angular/core@~11.2.3", "@angular/core@11.2.3":
+"@angular/core@^11.0.0", "@angular/core@^11.0.0 || ^12.0.0-0", "@angular/core@~11.2.3", "@angular/core@11.2.3":
   "integrity" "sha512-+G7rZj21Mcmf6nWjQ79EwomwEOVQ1WLqw6YvCXWzgJ9ZlVjLi/Sti0/jIzUpgK0E0Fn86yuXw/vgYq5kjGeOcQ=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-11.2.3.tgz"
   "version" "11.2.3"
@@ -224,17 +224,17 @@
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/forms@~11.2.3":
+"@angular/forms@^11.0.0 || ^12.0.0-0", "@angular/forms@~11.2.3":
   "integrity" "sha512-VfyKV8IxHTclcHQmt5gjGFmKC1kGz7sdNLYsEM+M0y88Bsufh3VIhK4kspfO4nhJxVfh6HFOt1JVQ5bvo6PDlQ=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-11.2.3.tgz"
   "version" "11.2.3"
   dependencies:
     "tslib" "^2.0.0"
 
-"@angular/material@^11.0.3":
-  "integrity" "sha512-YTHmtKGwjAEFAOOmuivcwnINMPHxvM7iZQpTgZqDKNiqiv53cwry2Ctb54suRNT+D794z59D0/r+YocGkzFv3w=="
-  "resolved" "https://registry.npmjs.org/@angular/material/-/material-11.0.3.tgz"
-  "version" "11.0.3"
+"@angular/material@^11.2.2":
+  "integrity" "sha512-mPCGmWlDJ1HvHWDcvzOqoOYepW/8S1JHi+RD4jG7hn77+cD78BR+Ze8bQgJWADHvrtbElTmjB1ExB+gB+7gP8g=="
+  "resolved" "https://registry.npmjs.org/@angular/material/-/material-11.2.2.tgz"
+  "version" "11.2.2"
   dependencies:
     "tslib" "^2.0.0"
 
@@ -7525,14 +7525,14 @@
   dependencies:
     "aproba" "^1.1.1"
 
-"rxjs@^6.5.3", "rxjs@~6.6.3", "rxjs@6.6.3":
-  "integrity" "sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ=="
-  "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-6.6.3.tgz"
-  "version" "6.6.3"
+"rxjs@^6.5.3", "rxjs@^6.6.0", "rxjs@~6.6.6":
+  "integrity" "sha512-/oTwee4N4iWzAMAL9xdGKjkEHmIwupR3oXbQjCKywF1BeFohswF3vZdogbmEF6pZkOsXTzWkrZszrWpQTByYVg=="
+  "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-6.6.6.tgz"
+  "version" "6.6.6"
   dependencies:
     "tslib" "^1.9.0"
 
-"rxjs@^6.6.0":
+"rxjs@6.6.3":
   "integrity" "sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-6.6.3.tgz"
   "version" "6.6.3"
