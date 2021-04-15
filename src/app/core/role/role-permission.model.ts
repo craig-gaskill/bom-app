@@ -1,12 +1,12 @@
 import {BaseModel} from '../base.model';
 
 export interface RolePermission extends BaseModel {
-  rolePermissionId: number;
+  rolePermissionId?: number;
   permissionId: number;
   featureId: number;
   code: string;
   display: string;
-  description: string;
+  description?: string;
   granted: boolean;
 }
 

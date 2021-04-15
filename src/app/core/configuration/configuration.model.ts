@@ -10,7 +10,7 @@ import {NameFormat} from './name-format.enum';
  */
 export interface Configuration {
   /**
-   * The {CgtNameFormat} to use when formatting a Person's name.
+   * The {NameFormat} to use when formatting a Person's name.
    */
   nameFormat: NameFormat;
 

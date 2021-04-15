@@ -48,7 +48,7 @@ export class ConfigurationService implements OnDestroy {
    * Sets the configuration to use. If 'undefined' or 'null' then it will reset back to the default configuration.
    *
    * @param config
-   *    The {CgtConfiguration} to use.
+   *    The {Configuration} to use.
    */
   public setConfiguration(config: Configuration) {
     this._config = ObjectUtil.valueOrElse(config, this.DEFAULT_CONFIG);
@@ -60,7 +60,7 @@ export class ConfigurationService implements OnDestroy {
    * will reset it back to the default of 'MediumLastFirst'.
    *
    * @param nameFormat
-   *    The {CgtNameFormat} to use for names.
+   *    The {NameFormat} to use for names.
    */
   public changeNameFormat(nameFormat: NameFormat): void {
     this._config = {

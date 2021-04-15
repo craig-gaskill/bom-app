@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {StoreModule} from '@ngrx/store';
+
 import {DictionaryValueComponent} from './dictionary-value.component';
 import {dictionaryFeature} from '../../store/dictionary-store.state';
 import {dictionaryReducer} from '../../store/dictionary-store.reducer';

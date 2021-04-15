@@ -5,7 +5,7 @@
  */
 export abstract class ObjectUtil {
   /**
-   * Checks whether the given parameter is defined (not null or defined).
+   * Checks whether the given parameter is defined (not null or undefined).
    *
    * These given data values will return these values.
    * undefined  = false;

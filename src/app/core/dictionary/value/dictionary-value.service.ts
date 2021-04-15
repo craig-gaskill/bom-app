@@ -3,9 +3,9 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
-import {environment} from "../../../../environments/environment";
-import {DictionaryValue, DictionaryValueUtil} from "./dictionary-value.model";
-import {ResponseUtil} from "../../utilities/response.util";
+import {environment} from '../../../../environments/environment';
+import {DictionaryValue, DictionaryValueUtil} from './dictionary-value.model';
+import {ResponseUtil} from '../../utilities/response.util';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class DictionaryValueService {
     let params = new HttpParams()
       .set('start', start.toString())
       .set('limit', limit.toString())
-      .set("includeInactive", includeInactive.toString());
+      .set('includeInactive', includeInactive.toString());
 
     if (name != null) {
       params = params.set('name', name);
