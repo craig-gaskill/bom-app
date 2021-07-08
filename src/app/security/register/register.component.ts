@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {takeWhile} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 import {RegisterRequest} from '../../core/authentication/register-request.model';
 import {AuthenticationService, LoginStatus} from '../../core/authentication/authentication.service';
@@ -16,7 +17,7 @@ import {BomInputComponent} from '../../shared/components/input/bom-input.compone
 export class RegisterComponent implements OnInit, OnDestroy {
   private readonly _SOURCE = 'REGISTRATION';
 
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
 
   public tenantRegistrationForm: FormGroup;
   public userRegistrationForm: FormGroup;
@@ -46,7 +47,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   public onStepChanged(event: StepperSelectionEvent): void {
@@ -73,7 +75,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this._authenticationService.register(registerRequest, this._SOURCE)
       .pipe(
-        takeWhile(() => this._subscribed)
+        takeUntil(this._unsubscribed$)
       )
       .subscribe(result => {
         if (result === LoginStatus.Valid) {

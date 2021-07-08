@@ -1,7 +1,7 @@
 import {Directive, OnDestroy} from '@angular/core';
 import {AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS, ValidationErrors} from '@angular/forms';
-import {Observable, timer} from 'rxjs';
-import {map, switchMap, takeWhile} from 'rxjs/operators';
+import {Observable, Subject, timer} from 'rxjs';
+import {map, switchMap, takeUntil} from 'rxjs/operators';
 
 import {AuthenticationService} from '../../core/authentication/authentication.service';
 
@@ -16,12 +16,13 @@ import {AuthenticationService} from '../../core/authentication/authentication.se
   ]
 })
 export class EmailInUseValidator implements AsyncValidator, OnDestroy {
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
 
   constructor(private _authService: AuthenticationService) { }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   public validate(control: AbstractControl): Observable<ValidationErrors|null> {
@@ -31,10 +32,10 @@ export class EmailInUseValidator implements AsyncValidator, OnDestroy {
 
     return timer(250)
       .pipe(
-        takeWhile(() => this._subscribed),
+        takeUntil(this._unsubscribed$),
         switchMap(() => this._authService.checkForEmail(control.value)
           .pipe(
-            takeWhile(() => this._subscribed),
+            takeUntil(this._unsubscribed$),
             map(result => result ? {emailInUse: true} : null)
           )
         )

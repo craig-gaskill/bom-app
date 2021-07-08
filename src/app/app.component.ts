@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map, takeWhile} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {map, takeUntil} from 'rxjs/operators';
 
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DEFAULT_INTERRUPTSOURCES, Idle} from '@ng-idle/core';
@@ -16,14 +16,14 @@ import {InactiveDialogComponent} from './security/inactive/inactive-dialog.compo
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
   private _idleInactiveSeconds = environment.idleInactiveSeconds;
   private _idleTimeoutSeconds = environment.idleTimeoutSeconds;
   private _inactiveDialog: MatDialogRef<any>;
 
   public isAuthenticated$: Observable<boolean> = this._authenticationService.authenticatedStatus$()
     .pipe(
-      takeWhile(() => this._subscribed),
+      takeUntil(this._unsubscribed$),
       map(loginStatus => loginStatus === LoginStatus.Valid)
     );
 
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this._authenticationService.authenticatedStatus$()
       .pipe(
-        takeWhile(() => this._subscribed)
+        takeUntil(this._unsubscribed$)
       )
       .subscribe(result => {
         if (result === LoginStatus.Valid) {
@@ -47,7 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = true;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   private _setupIdleTimers(): void {
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this._idle.onIdleStart
       .pipe(
-        takeWhile(() => this._subscribed)
+        takeUntil(this._unsubscribed$)
       )
       .subscribe(() => {
         this._inactiveDialog = this._dialog.open(InactiveDialogComponent, {
@@ -72,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this._inactiveDialog.afterClosed()
           .pipe(
-            takeWhile(() => this._subscribed)
+            takeUntil(this._unsubscribed$)
           )
           .subscribe(result => {
             if (result === 'LOGOUT') {
@@ -85,7 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this._idle.onIdleEnd
       .pipe(
-        takeWhile(() => this._subscribed)
+        takeUntil(this._unsubscribed$)
       )
       .subscribe(() => {
         if (this._inactiveDialog) {

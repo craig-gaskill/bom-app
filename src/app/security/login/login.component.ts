@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {finalize, takeWhile} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {finalize, takeUntil} from 'rxjs/operators';
 
 import {AuthenticationService, LoginStatus} from '../../core/authentication/authentication.service';
 
@@ -14,7 +15,7 @@ import {AuthenticationService, LoginStatus} from '../../core/authentication/auth
 export class LoginComponent implements OnInit, OnDestroy {
   private readonly _SOURCE = 'LOGIN';
 
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
   private _returnUrl: string;
 
   public loginForm: FormGroup;
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   public onLogin(): void {
@@ -52,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this._authenticationService.login(formValues.email, formValues.password, this._SOURCE)
       .pipe(
-        takeWhile(() => this._subscribed),
+        takeUntil(this._unsubscribed$),
         finalize(() => this.processing = false)
       )
       .subscribe(loginStatus => {

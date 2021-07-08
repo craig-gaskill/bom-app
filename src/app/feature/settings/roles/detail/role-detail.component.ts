@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {takeWhile} from 'rxjs/operators';
-import {ReplaySubject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ReplaySubject, Subject} from 'rxjs';
 
 import {Role} from '../../../../core/role/role.model';
 import {RolePermission} from '../../../../core/role/role-permission.model';
@@ -32,7 +32,7 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
   private readonly PERMISSION_EDIT   = 'edit';
   private readonly PERMISSION_DELETE = 'delete';
 
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
   private _sections: Map<string, RoleSection> = new Map<string, RoleSection>();
 
   @Input()
@@ -49,16 +49,19 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
 
     this._roleManager.selectRole(this.roleId)
       .pipe(
-        takeWhile(() => this._subscribed)
+        takeUntil(this._unsubscribed$)
       )
       .subscribe(result => {
         this._sections = this._parseIntoSections(result);
+        const groups = this._groupSections(this._sections);
+
         this.role$.next(result);
       });
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   /**
@@ -186,25 +189,16 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
     }
 
     const groups: Map<string, RoleSection[]> = new Map<string, RoleSection[]>();
-    // sections.forEach((section, key) => {
-    //   const parts = section.permission.code.split('.');
-    //   if (ArrayUtil.isNotEmpty(parts)) {
-    //     if (parts.length > 1) {
-    //       let key = '';
-    //
-    //       parts.forEach((part, idx) => {
-    //         if (idx !== 0) {
-    //           if (idx > 1) {
-    //             key += '.';
-    //           }
-    //           key += part;
-    //         }
-    //       });
-    //
-    //       const part = this._groupSections(key, section);
-    //     }
-    //   }
-    // });
+    sections
+      .forEach((section, key) => {
+        console.log(`RoleDetailComponent::_groupSections [${key}]`);
+        const parts = section.permission.code.split('.');
+        if (ArrayUtil.isNotEmpty(parts)) {
+          if (parts.length > 1) {
+          }
+        }
+      }
+    );
 
     return groups;
   }

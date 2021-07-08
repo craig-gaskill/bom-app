@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map, shareReplay, takeWhile} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {map, shareReplay, takeUntil} from 'rxjs/operators';
 
 import {MatDialog} from '@angular/material/dialog';
 
@@ -14,11 +14,11 @@ import {AuthenticationService} from '../core/authentication/authentication.servi
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit, OnDestroy {
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
 
   public isHandset$: Observable<boolean> = this._breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
-      takeWhile(() => this._subscribed),
+      takeUntil(this._unsubscribed$),
       map(result => result.matches),
       shareReplay()
     );
@@ -36,7 +36,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   public onLogout(): void {

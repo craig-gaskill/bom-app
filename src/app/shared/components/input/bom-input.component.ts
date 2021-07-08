@@ -10,7 +10,8 @@ import {
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, FormControl, NgControl} from '@angular/forms';
-import {takeWhile} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 import {ThemePalette} from '@angular/material/core';
 
@@ -22,6 +23,8 @@ import {ConfigurationService} from '../../../core/configuration/configuration.se
   styleUrls: ['./bom-input.component.scss']
 })
 export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+  private _unsubscribed$ = new Subject();
+
   constructor(private _configurationService: ConfigurationService,
               @Optional() @Self() private _ngControl: NgControl
   ) {
@@ -29,8 +32,6 @@ export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestro
       this._ngControl.valueAccessor = this;
     }
   }
-
-  private _subscribed = true;
 
   @Input() public id: string;
   @Input() public name: string;
@@ -67,7 +68,7 @@ export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
       this._ngControl.control.statusChanges
         .pipe(
-          takeWhile(() => this._subscribed)
+          takeUntil(this._unsubscribed$)
         )
         .subscribe(change => {
           if (change === 'INVALID') {
@@ -80,7 +81,8 @@ export class BomInputComponent implements ControlValueAccessor, OnInit, OnDestro
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   @HostListener('focus')

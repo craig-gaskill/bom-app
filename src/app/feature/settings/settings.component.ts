@@ -5,7 +5,8 @@ import {
   Router,
   RouterOutlet
 } from '@angular/router';
-import {filter, takeWhile} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {filter, takeUntil} from 'rxjs/operators';
 
 import {ObjectUtil} from '../../core/utilities/object.util';
 
@@ -15,7 +16,7 @@ import {ObjectUtil} from '../../core/utilities/object.util';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit, OnDestroy {
-  private _subscribed = true;
+  private _unsubscribed$ = new Subject();
 
   public childRoute: string;
 
@@ -27,7 +28,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this._router.events
       .pipe(
-        takeWhile(() => this._subscribed),
+        takeUntil(this._unsubscribed$),
         filter(event => event instanceof NavigationStart)
       )
       .subscribe((event: NavigationStart) => {
@@ -41,10 +42,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     this._router.events
       .pipe(
-        takeWhile(() => this._subscribed),
+        takeUntil(this._unsubscribed$),
         filter(event => event instanceof ActivationStart)
       )
-      .subscribe((event: ActivationStart) => {
+      .subscribe(() => {
         if (this._outlet) {
           this._outlet.deactivate();
         }
@@ -52,7 +53,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscribed = false;
+    this._unsubscribed$.next();
+    this._unsubscribed$.complete();
   }
 
   public get childRouteName(): string {
