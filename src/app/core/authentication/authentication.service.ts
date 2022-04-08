@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, ReplaySubject} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, ReplaySubject} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
-import {User} from "../user/user.model";
-import {environment} from "../../../environments/environment";
-import {HeaderUtil} from "../utilities/header.util";
-import {ResponseUtil} from "../utilities/response.util";
-import {UserService} from "../user/user.service";
-import {AuthenticationUtil} from "./authentication.util";
-import {RegisterRequest} from "./register-request.model";
-import {ObjectUtil} from "../utilities/object.util";
+import {User} from '../user/user.model';
+import {environment} from '../../../environments/environment';
+import {HeaderUtil} from '../utilities/header.util';
+import {ResponseUtil} from '../utilities/response.util';
+import {UserService} from '../user/user.service';
+import {AuthenticationUtil} from './authentication.util';
+import {RegisterRequest} from './register-request.model';
+import {ObjectUtil} from '../utilities/object.util';
 
 export interface LoginResponse {
   access: string;
